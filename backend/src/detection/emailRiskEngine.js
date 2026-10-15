@@ -3,47 +3,64 @@
 // ============================================
 
 function calculateEmailRisk(checks) {
-  let score = 0;
+  if (!checks || typeof checks !== "object") {
+    throw new Error("Valid email checks are required");
+  }
 
-  score +=
-    checks.urgentLanguage?.score || 0;
+  const ruleScores = [
+    checks.urgentLanguage?.score,
+    checks.scamKeywords?.score,
+    checks.credentialRequests?.score,
+    checks.fakeSecurityWarnings?.score,
+    checks.suspiciousLinks?.score,
+  ];
 
-  score +=
-    checks.scamKeywords?.score || 0;
+  // Validate and safely combine rule scores.
+  const score = Math.min(
+    ruleScores.reduce((total, value) => {
+      const number = Number(value ?? 0);
 
-  score +=
-    checks.credentialRequests?.score || 0;
+      if (!Number.isFinite(number) || number < 0) {
+        return total;
+      }
 
-  score +=
-    checks.fakeSecurityWarnings?.score || 0;
-
-  score +=
-    checks.suspiciousLinks?.score || 0;
-
-  score = Math.min(
-    Math.max(score, 0),
+      return total + number;
+    }, 0),
     100
   );
+
+  // Count independent categories that detected indicators.
+  const detectedCategories = [
+    checks.urgentLanguage?.detected,
+    checks.scamKeywords?.detected,
+    checks.credentialRequests?.detected,
+    checks.fakeSecurityWarnings?.detected,
+    checks.suspiciousLinks?.detected,
+  ].filter(Boolean).length;
 
   let riskLevel;
   let status;
   let recommendation;
 
-  if (score >= 60) {
+  // High risk requires a high score or multiple strong indicators.
+  if (
+    score >= 60 ||
+    (score >= 40 && detectedCategories >= 3)
+  ) {
     riskLevel = "HIGH";
     status = "Possible Phishing Attempt Detected";
     recommendation =
-      "Avoid interacting with this email";
-  } else if (score >= 30) {
+      "Do not click links or share sensitive information. Verify through the official website or contact channel.";
+  } else if (score >= 25) {
     riskLevel = "MEDIUM";
     status = "Potentially Suspicious Email";
     recommendation =
-      "Proceed With Caution";
+      "Proceed With Caution. Verify the sender and links before taking action.";
   } else {
     riskLevel = "LOW";
-    status = "Likely Safe Email";
+    status = "No Strong Phishing Indicators Detected";
     recommendation =
-      "Email Appears Safe";
+      "No strong warning signs were detected by these rules. Still verify unexpected requests.";
   }
 
   return {
@@ -51,6 +68,7 @@ function calculateEmailRisk(checks) {
     riskLevel,
     status,
     recommendation,
+    detectedCategories,
   };
 }
 
