@@ -26,6 +26,15 @@ function checkUrgentLanguage(emailContent) {
     "last warning",
     "security alert",
     "important notice",
+    "account is suspended",
+"account has been suspended",
+"your account is suspended",
+"click here",
+"click the link",
+"verify your password",
+"confirm your password",
+"enter your password",
+"immediately verify",
   ];
 
   const lowerContent = emailContent.toLowerCase();
