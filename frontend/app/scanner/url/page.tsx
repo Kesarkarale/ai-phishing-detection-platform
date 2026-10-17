@@ -1,4 +1,3 @@
-
 "use client";
 
 import { FormEvent, useState } from "react";
@@ -147,13 +146,13 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-5">
-      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-400">
+      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--brand)]">
         {eyebrow}
       </p>
-      <h2 className="mt-2 text-lg font-bold tracking-tight text-white sm:text-xl">
+      <h2 className="mt-2 text-lg font-bold tracking-tight sm:text-xl">
         {title}
       </h2>
-      <p className="mt-1 text-sm leading-6 text-slate-400">
+      <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
         {description}
       </p>
     </div>
@@ -163,7 +162,7 @@ function SectionTitle({
 function StatusPill({ detected }: { detected?: boolean }) {
   if (detected === undefined) {
     return (
-      <span className="rounded-full border border-slate-700 bg-slate-800/80 px-2.5 py-1 text-[10px] font-semibold text-slate-400">
+      <span className="rounded-full border border-[var(--line)] bg-slate-800/80 px-2.5 py-1 text-[10px] font-semibold text-[var(--muted)]">
         NOT REPORTED
       </span>
     );
@@ -202,19 +201,19 @@ function DetectionCard({
     (typeof check?.passed === "boolean" ? !check.passed : undefined);
 
   return (
-    <article className="group rounded-2xl border border-slate-800 bg-[#101a2b] p-4 transition duration-200 hover:-translate-y-0.5 hover:border-cyan-500/40 hover:bg-[#132036]">
+    <article className="group rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:bg-[var(--surface)]">
       <div className="flex items-start justify-between gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/10 bg-cyan-400/10 text-cyan-300">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--paper)] text-[var(--brand)]">
           <Icon size={19} />
         </div>
         <StatusPill detected={detected} />
       </div>
 
       <h3 className="mt-4 text-sm font-bold text-white">{title}</h3>
-      <p className="mt-1 text-xs leading-5 text-slate-400">{subtitle}</p>
+      <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{subtitle}</p>
 
       {check?.message && (
-        <p className="mt-3 break-words border-t border-slate-800 pt-3 text-xs leading-5 text-slate-400">
+        <p className="mt-3 break-words border-t border-[var(--line)] pt-3 text-xs leading-5 text-[var(--muted)]">
           {check.message}
         </p>
       )}
@@ -245,7 +244,7 @@ function ExternalCard({
     service?.threatDetected === true || malicious > 0 || suspicious > 0;
 
   let label = "Not configured";
-  let statusColor = "text-slate-400";
+  let statusColor = "text-[var(--muted)]";
   let StatusIcon = CircleHelp;
 
   if (available && checked && threatFound) {
@@ -263,15 +262,15 @@ function ExternalCard({
   }
 
   return (
-    <article className="rounded-2xl border border-slate-800 bg-[#101a2b] p-5 sm:p-6">
+    <article className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5 sm:p-6">
       <div className="flex items-start gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-violet-400/20 bg-violet-400/10 text-violet-300">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-violet-400/20 bg-violet-400/10 text-[var(--brand)]">
           <Icon size={21} />
         </div>
 
         <div className="min-w-0 flex-1">
           <h3 className="font-bold text-white">{title}</h3>
-          <p className="mt-1 text-xs leading-5 text-slate-400">
+          <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
             {subtitle}
           </p>
         </div>
@@ -288,13 +287,13 @@ function ExternalCard({
             { label: "Malicious", value: malicious, color: "text-rose-300" },
             { label: "Suspicious", value: suspicious, color: "text-amber-300" },
             { label: "Harmless", value: harmless, color: "text-emerald-300" },
-            { label: "Undetected", value: undetected, color: "text-slate-300" },
+            { label: "Undetected", value: undetected, color: "text-[var(--muted)]" },
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-xl border border-slate-800 bg-[#0b1322] p-3"
+              className="rounded-xl border border-[var(--line)] bg-[var(--surface)] p-3"
             >
-              <p className="text-[11px] text-slate-500">{item.label}</p>
+              <p className="text-[11px] text-[var(--muted)]">{item.label}</p>
               <p className={`mt-1 text-xl font-extrabold ${item.color}`}>
                 {item.value}
               </p>
@@ -304,7 +303,7 @@ function ExternalCard({
       )}
 
       {!available && (
-        <p className="mt-4 text-xs leading-5 text-slate-500">
+        <p className="mt-4 text-xs leading-5 text-[var(--muted)]">
           This API is unavailable or not configured. No safety conclusion can
           be drawn from an unavailable check.
         </p>
@@ -317,7 +316,7 @@ function ExternalCard({
       )}
 
       {service?.message && (
-        <p className="mt-3 break-words text-xs leading-5 text-slate-500">
+        <p className="mt-3 break-words text-xs leading-5 text-[var(--muted)]">
           {service.message}
         </p>
       )}
@@ -379,7 +378,7 @@ export default function URLScannerPage() {
 
       setError(
         message.toLowerCase().includes("failed to fetch")
-          ? "Backend connection failed. Make sure your server is running on port 5000."
+          ? "Backend connection failed. Check NEXT_PUBLIC_API_URL and make sure the backend service is running."
           : message
       );
     } finally {
@@ -431,24 +430,24 @@ export default function URLScannerPage() {
     : [];
 
   return (
-    <main className="min-h-screen bg-[#080f1d] text-slate-200">
+    <main className="min-h-screen bg-[var(--surface)] text-[var(--muted)]">
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-cyan-500/[0.07] blur-3xl" />
         <div className="absolute -right-40 top-80 h-96 w-96 rounded-full bg-violet-500/[0.06] blur-3xl" />
       </div>
 
       <div className="relative">
-        <header className="sticky top-0 z-20 border-b border-slate-800/90 bg-[#080f1d]/90 backdrop-blur-xl">
+        <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-[var(--surface)]/90 backdrop-blur-xl">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-lg shadow-cyan-950/40">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 shadow-lg shadow-cyan-950/40">
                 <Shield size={24} />
               </div>
               <div>
-                <h1 className="text-base font-extrabold tracking-tight text-white sm:text-lg">
-                  PhishGuard<span className="text-cyan-400">.</span>
+                <h1 className="text-base font-extrabold tracking-tight sm:text-lg">
+                  PhishGuard<span className="text-[var(--brand)]">.</span>
                 </h1>
-                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
                   Threat intelligence platform
                 </p>
               </div>
@@ -467,27 +466,27 @@ export default function URLScannerPage() {
         </header>
 
         <div className="mx-auto max-w-[1400px] px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
-          <div className="mb-8 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+          <div className="mb-8 flex flex-wrap items-center gap-2 text-xs text-[var(--muted)]">
             <span>Security Lab</span>
             <ChevronRight size={13} />
-            <span className="text-cyan-300">URL Scanner</span>
+            <span className="text-[var(--brand)]">URL Scanner</span>
           </div>
 
           <div className="grid gap-8 xl:grid-cols-[1fr_420px] xl:items-center">
             <section>
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[10px] font-bold tracking-[0.15em] text-cyan-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-cyan-400/[0.06] px-3 py-1.5 text-[10px] font-bold tracking-[0.15em] text-[var(--brand)]">
                 <Sparkles size={13} />
                 INTELLIGENT URL INSPECTION
               </div>
 
-              <h2 className="mt-5 max-w-3xl text-4xl font-black leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h2 className="mt-5 max-w-3xl text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
                 Don't trust the link.
                 <span className="mt-2 block bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
                   Verify it first.
                 </span>
               </h2>
 
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--muted)] sm:text-base">
                 Investigate suspicious URLs with rule-based analysis and
                 available threat intelligence from VirusTotal and Google Safe
                 Browsing.
@@ -498,11 +497,11 @@ export default function URLScannerPage() {
                   (feature) => (
                     <span
                       key={feature}
-                      className="rounded-lg border border-slate-800 bg-slate-900/70 px-3 py-2 text-xs text-slate-300"
+                      className="rounded-lg border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-xs text-[var(--muted)]"
                     >
                       <CheckCircle2
                         size={13}
-                        className="mr-1.5 inline text-cyan-400"
+                        className="mr-1.5 inline text-[var(--brand)]"
                       />
                       {feature}
                     </span>
@@ -511,14 +510,14 @@ export default function URLScannerPage() {
               </div>
             </section>
 
-            <section className="rounded-3xl border border-slate-700/80 bg-gradient-to-br from-[#152238] to-[#0d1728] p-5 shadow-2xl shadow-black/20 sm:p-6">
+            <section className="rounded-3xl border border-[var(--line)] bg-gradient-to-br from-[#152238] to-[#0d1728] p-5 shadow-2xl shadow-black/20 sm:p-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-300">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--paper)] text-[var(--brand)]">
                   <Radar size={25} />
                 </div>
                 <div>
                   <h3 className="font-bold text-white">URL Security Scanner</h3>
-                  <p className="mt-1 text-xs text-slate-400">
+                  <p className="mt-1 text-xs text-[var(--muted)]">
                     Start a new security assessment
                   </p>
                 </div>
@@ -527,13 +526,13 @@ export default function URLScannerPage() {
               <form onSubmit={handleScan} className="mt-6">
                 <label
                   htmlFor="scan-url"
-                  className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400"
+                  className="mb-2 block text-xs font-bold uppercase tracking-wider text-[var(--muted)]"
                 >
                   Target URL
                 </label>
 
-                <div className="flex items-center gap-3 rounded-xl border border-slate-700 bg-[#080f1d] px-3 transition focus-within:border-cyan-400/70 focus-within:ring-4 focus-within:ring-cyan-400/[0.08]">
-                  <Globe2 size={18} className="shrink-0 text-cyan-400" />
+                <div className="flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 transition focus-within:border-[var(--brand)] focus-within:ring-4 focus-within:ring-cyan-400/[0.08]">
+                  <Globe2 size={18} className="shrink-0 text-[var(--brand)]" />
                   <input
                     id="scan-url"
                     type="text"
@@ -542,7 +541,7 @@ export default function URLScannerPage() {
                     placeholder="https://example.com"
                     autoComplete="url"
                     disabled={loading}
-                    className="min-w-0 flex-1 bg-transparent py-4 text-sm text-white outline-none placeholder:text-slate-600"
+                    className="min-w-0 flex-1 bg-transparent py-4 text-sm outline-none placeholder:text-[var(--muted)]"
                   />
                   {url && (
                     <button
@@ -550,21 +549,21 @@ export default function URLScannerPage() {
                       onClick={resetScanner}
                       disabled={loading}
                       aria-label="Clear URL"
-                      className="rounded-lg p-1 text-slate-500 hover:bg-slate-800 hover:text-white"
+                      className="rounded-lg p-1 text-[var(--muted)] hover:bg-slate-800 hover:text-white"
                     >
                       <X size={17} />
                     </button>
                   )}
                 </div>
 
-                <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                <p className="mt-2 text-[11px] leading-5 text-[var(--muted)]">
                   Include the protocol, for example https://
                 </p>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-blue-950/40 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3.5 text-sm font-extrabold shadow-lg shadow-blue-950/40 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? (
                     <>
@@ -598,17 +597,17 @@ export default function URLScannerPage() {
               )}
 
               {loading && (
-                <div className="mt-4 rounded-xl border border-cyan-400/15 bg-cyan-400/[0.04] p-4">
+                <div className="mt-4 rounded-xl border border-[var(--line)] bg-cyan-400/[0.04] p-4">
                   <div className="flex items-center justify-between gap-3 text-xs">
-                    <span className="font-semibold text-cyan-200">
+                    <span className="font-semibold text-[var(--brand)]">
                       Inspecting URL signals
                     </span>
-                    <span className="text-slate-500">Please wait</span>
+                    <span className="text-[var(--muted)]">Please wait</span>
                   </div>
                   <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800">
                     <div className="h-full w-2/3 animate-pulse rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
                   </div>
-                  <p className="mt-2 text-[11px] text-slate-500">
+                  <p className="mt-2 text-[11px] text-[var(--muted)]">
                     Running local rules and configured reputation checks.
                   </p>
                 </div>
@@ -620,13 +619,13 @@ export default function URLScannerPage() {
             <div className="mt-12 space-y-10">
               <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-400">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--brand)]">
                     Analysis report
                   </p>
-                  <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+                  <h2 className="mt-2 text-2xl font-black sm:text-3xl">
                     Security assessment
                   </h2>
-                  <p className="mt-2 text-sm text-slate-400">
+                  <p className="mt-2 text-sm text-[var(--muted)]">
                     Review each detection signal before deciding what to do next.
                   </p>
                 </div>
@@ -634,7 +633,7 @@ export default function URLScannerPage() {
                 <button
                   type="button"
                   onClick={resetScanner}
-                  className="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-slate-700 bg-slate-900 px-4 py-2.5 text-xs font-bold text-slate-300 transition hover:border-cyan-400/50 hover:text-white sm:self-auto"
+                  className="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-2.5 text-xs font-bold text-[var(--muted)] transition hover:border-[var(--brand)] hover:sm:self-auto"
                 >
                   <RefreshCw size={15} />
                   New scan
@@ -642,17 +641,17 @@ export default function URLScannerPage() {
               </div>
 
               <div className="grid gap-5 xl:grid-cols-[0.8fr_1.2fr]">
-                <section className="rounded-3xl border border-slate-800 bg-[#101a2b] p-6 sm:p-8">
+                <section className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-8">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs font-bold text-slate-400">
+                      <p className="text-xs font-bold text-[var(--muted)]">
                         OVERALL RISK SCORE
                       </p>
-                      <p className="mt-1 text-[11px] text-slate-600">
+                      <p className="mt-1 text-[11px] text-[var(--muted)]">
                         Scale from 0 to 100
                       </p>
                     </div>
-                    <div className="rounded-xl border border-slate-700 bg-slate-900 p-2.5 text-cyan-300">
+                    <div className="rounded-xl border border-[var(--line)] bg-[var(--paper)] p-2.5 text-[var(--brand)]">
                       <Target size={20} />
                     </div>
                   </div>
@@ -667,12 +666,12 @@ export default function URLScannerPage() {
                         )}%, #243247 0)`,
                       }}
                     >
-                      <div className="absolute inset-[8px] rounded-full bg-[#101a2b]" />
+                      <div className="absolute inset-[8px] rounded-full bg-[var(--surface)]" />
                       <div className="relative text-center">
                         <p className="text-6xl font-black tracking-tighter text-white">
                           {result.riskScore}
                         </p>
-                        <p className="mt-1 text-[10px] font-bold tracking-[0.2em] text-slate-500">
+                        <p className="mt-1 text-[10px] font-bold tracking-[0.2em] text-[var(--muted)]">
                           RISK POINTS
                         </p>
                       </div>
@@ -691,49 +690,49 @@ export default function URLScannerPage() {
                       {risk.label}
                     </span>
 
-                    <p className="mt-3 text-center text-sm text-slate-400">
+                    <p className="mt-3 text-center text-sm text-[var(--muted)]">
                       {risk.message}
                     </p>
                   </div>
 
-                  <div className="mt-7 border-t border-slate-800 pt-5">
-                    <p className="text-xs font-bold text-slate-300">
+                  <div className="mt-7 border-t border-[var(--line)] pt-5">
+                    <p className="text-xs font-bold text-[var(--muted)]">
                       Recommendation
                     </p>
-                    <p className="mt-2 text-sm leading-6 text-slate-400">
+                    <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
                       {result.recommendation ||
                         "Review all available scan signals before visiting the website."}
                     </p>
                   </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-800 bg-[#101a2b] p-5 sm:p-7">
+                <section className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-5 sm:p-7">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs font-bold text-slate-400">
+                      <p className="text-xs font-bold text-[var(--muted)]">
                         TARGET INFORMATION
                       </p>
                       <h3 className="mt-1 text-lg font-bold text-white">
                         Scan overview
                       </h3>
                     </div>
-                    <div className="rounded-xl border border-slate-700 bg-slate-900 p-2.5 text-cyan-300">
+                    <div className="rounded-xl border border-[var(--line)] bg-[var(--paper)] p-2.5 text-[var(--brand)]">
                       <Activity size={20} />
                     </div>
                   </div>
 
-                  <div className="mt-5 rounded-2xl border border-slate-800 bg-[#0b1322] p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  <div className="mt-5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
                       Scanned URL
                     </p>
-                    <p className="mt-2 break-all text-sm font-semibold leading-6 text-cyan-200">
+                    <p className="mt-2 break-all text-sm font-semibold leading-6 text-[var(--brand)]">
                       {result.url}
                     </p>
                   </div>
 
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-slate-800 bg-[#0b1322] p-4">
-                      <div className="flex items-center gap-2 text-slate-500">
+                    <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+                      <div className="flex items-center gap-2 text-[var(--muted)]">
                         <Activity size={15} />
                         <span className="text-xs">Scan status</span>
                       </div>
@@ -742,8 +741,8 @@ export default function URLScannerPage() {
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-slate-800 bg-[#0b1322] p-4">
-                      <div className="flex items-center gap-2 text-slate-500">
+                    <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+                      <div className="flex items-center gap-2 text-[var(--muted)]">
                         <History size={15} />
                         <span className="text-xs">Scan history</span>
                       </div>
@@ -758,7 +757,7 @@ export default function URLScannerPage() {
                   </div>
 
                   {result.scannedAt && (
-                    <div className="mt-4 flex items-start gap-2 text-xs leading-5 text-slate-500">
+                    <div className="mt-4 flex items-start gap-2 text-xs leading-5 text-[var(--muted)]">
                       <Clock3 size={14} className="mt-0.5 shrink-0" />
                       <span>
                         Scanned at:{" "}
@@ -772,7 +771,7 @@ export default function URLScannerPage() {
                       <AlertTriangle size={15} />
                       Important security note
                     </p>
-                    <p className="mt-2 text-xs leading-5 text-slate-400">
+                    <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
                       A low risk score is not proof that a website is safe.
                       New phishing websites may not yet be listed in reputation
                       databases.
@@ -825,9 +824,9 @@ export default function URLScannerPage() {
                 </div>
               </section>
 
-              <div className="flex items-start gap-3 rounded-2xl border border-slate-800 bg-[#101a2b] p-4">
-                <KeyRound size={17} className="mt-0.5 shrink-0 text-cyan-300" />
-                <p className="text-xs leading-6 text-slate-400">
+              <div className="flex items-start gap-3 rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+                <KeyRound size={17} className="mt-0.5 shrink-0 text-[var(--brand)]" />
+                <p className="text-xs leading-6 text-[var(--muted)]">
                   PhishGuard provides an automated assessment, not a guarantee
                   of safety. Do not submit passwords, private tokens, or
                   confidential information to unknown websites.
@@ -860,15 +859,15 @@ export default function URLScannerPage() {
               ].map((feature) => (
                 <article
                   key={feature.title}
-                  className="rounded-2xl border border-slate-800 bg-[#101a2b] p-5 transition hover:border-slate-700"
+                  className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5 transition hover:border-[var(--line)]"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/15 bg-cyan-400/[0.07] text-cyan-300">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--paper)] text-[var(--brand)]">
                     <feature.icon size={20} />
                   </div>
                   <h3 className="mt-4 text-sm font-bold text-white">
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-xs leading-6 text-slate-400">
+                  <p className="mt-2 text-xs leading-6 text-[var(--muted)]">
                     {feature.description}
                   </p>
                 </article>
@@ -876,12 +875,12 @@ export default function URLScannerPage() {
             </section>
           )}
 
-          <footer className="mt-12 border-t border-slate-800 py-6 text-center">
-            <p className="text-xs font-semibold text-slate-400">
-              PhishGuard <span className="text-cyan-400">·</span> AI Phishing
+          <footer className="mt-12 border-t border-[var(--line)] py-6 text-center">
+            <p className="text-xs font-semibold text-[var(--muted)]">
+              PhishGuard <span className="text-[var(--brand)]">·</span> AI Phishing
               Detection Platform
             </p>
-            <p className="mt-2 text-[10px] text-slate-600">
+            <p className="mt-2 text-[10px] text-[var(--muted)]">
               Security research and awareness project
             </p>
           </footer>

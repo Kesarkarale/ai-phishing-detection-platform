@@ -265,7 +265,7 @@ export default function EmailAnalyzerPage() {
 
       if (err instanceof TypeError && err.message === "Failed to fetch") {
         setError(
-          "Unable to connect to the backend. Make sure the backend is running on http://localhost:5000."
+          "Unable to connect to the backend. Check the API URL and make sure the backend service is running."
         );
       } else {
         setError(
@@ -296,30 +296,30 @@ export default function EmailAnalyzerPage() {
     : getRiskStyles("LOW");
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <main className="min-h-screen bg-[var(--surface)] text-[var(--muted)]">
       {/* Background decoration */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-blue-100/60 blur-3xl" />
-        <div className="absolute -right-32 top-40 h-96 w-96 rounded-full bg-indigo-100/50 blur-3xl" />
+        <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-[var(--paper)]/60 blur-3xl" />
+        <div className="absolute -right-32 top-40 h-96 w-96 rounded-full bg-violet-500/[0.07] blur-3xl" />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
         {/* Header */}
         <section className="mx-auto max-w-4xl text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500 shadow-lg shadow-cyan-500/15">
             <Mail size={31} />
           </div>
 
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--paper)] px-4 py-2 text-sm font-semibold text-[var(--brand)]">
             <Sparkles size={15} />
             AI-Assisted Phishing Analysis
           </div>
 
-          <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+          <h1 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             Email Security Analyzer
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[var(--muted)] sm:text-base">
             Analyze suspicious emails for urgent language, scam keywords,
             credential requests, fake security warnings and suspicious links.
           </p>
@@ -327,20 +327,20 @@ export default function EmailAnalyzerPage() {
 
         {/* Main analyzer */}
         <section className="mx-auto mt-10 max-w-6xl">
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+          <div className="overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-2xl shadow-black/20">
             {/* Top bar */}
-            <div className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white px-5 py-5 sm:px-7">
+            <div className="border-b border-[var(--line)] bg-gradient-to-r from-[#0b1322] to-[#0f1b2e] px-5 py-5 sm:px-7">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--paper)] text-[var(--brand)]">
                     <ScanSearch size={22} />
                   </div>
 
                   <div>
-                    <h2 className="font-bold text-slate-900">
+                    <h2 className="font-bold text-[var(--muted)]">
                       Analyze Email Content
                     </h2>
-                    <p className="text-xs text-slate-500 sm:text-sm">
+                    <p className="text-xs text-[var(--muted)] sm:text-sm">
                       Paste the complete email message below.
                     </p>
                   </div>
@@ -349,7 +349,7 @@ export default function EmailAnalyzerPage() {
                 <button
                   type="button"
                   onClick={loadSample}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-2.5 text-sm font-semibold text-[var(--brand)] transition hover:bg-[var(--paper)]"
                 >
                   <Sparkles size={16} />
                   Try Sample
@@ -361,13 +361,13 @@ export default function EmailAnalyzerPage() {
               <div className="mb-3 flex items-center justify-between gap-3">
                 <label
                   htmlFor="email-content"
-                  className="flex items-center gap-2 text-sm font-bold text-slate-800"
+                  className="flex items-center gap-2 text-sm font-bold text-[var(--muted)]"
                 >
-                  <FileWarning size={17} className="text-blue-600" />
+                  <FileWarning size={17} className="text-[var(--brand)]" />
                   Email Message
                 </label>
 
-                <span className="text-xs font-medium text-slate-400">
+                <span className="text-xs font-medium text-[var(--muted)]">
                   {characterCount.toLocaleString()} characters
                 </span>
               </div>
@@ -386,7 +386,7 @@ export default function EmailAnalyzerPage() {
 
 Example:
 Your account will be suspended. Verify your credentials immediately...`}
-                  className="min-h-[280px] w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-7 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-100 sm:min-h-[330px] sm:px-5"
+                  className="min-h-[280px] w-full resize-y rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-4 py-4 text-sm leading-7 text-[var(--muted)] outline-none transition placeholder:text-[var(--muted)] focus:border-[var(--brand)] focus:bg-[var(--surface)] focus:ring-4 focus:ring-cyan-400/10 sm:min-h-[330px] sm:px-5"
                 />
               </div>
 
@@ -405,7 +405,7 @@ Your account will be suspended. Verify your credentials immediately...`}
                   type="button"
                   onClick={clearEmail}
                   disabled={loading || !emailContent}
-                  className="rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-xl border border-[var(--line)] bg-[var(--surface)] px-5 py-3 text-sm font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Clear
                 </button>
@@ -413,7 +413,7 @@ Your account will be suspended. Verify your credentials immediately...`}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold shadow-lg shadow-cyan-500/15 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? (
                     <>
@@ -456,22 +456,22 @@ Your account will be suspended. Verify your credentials immediately...`}
                           {result.riskLevel} RISK
                         </span>
 
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+                        <span className="rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-[var(--muted)]">
                           {detectedRules} / {RULE_CONFIG.length} rules detected
                         </span>
                       </div>
 
-                      <h2 className="mt-3 text-xl font-bold text-slate-950 sm:text-2xl">
+                      <h2 className="mt-3 text-xl font-bold sm:text-2xl">
                         {result.status}
                       </h2>
 
-                      <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                      <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--muted)]">
                         {result.recommendation}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-5 rounded-2xl border border-white/80 bg-white/70 px-5 py-4">
+                  <div className="flex items-center gap-5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-5 py-4">
                     <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-8 border-white shadow-sm">
                       <span
                         className={`text-xl font-black ${riskStyles.text}`}
@@ -481,10 +481,10 @@ Your account will be suspended. Verify your credentials immediately...`}
                     </div>
 
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
                         Risk Score
                       </p>
-                      <p className="mt-1 text-sm font-semibold text-slate-800">
+                      <p className="mt-1 text-sm font-semibold text-[var(--muted)]">
                         out of 100
                       </p>
                     </div>
@@ -492,12 +492,12 @@ Your account will be suspended. Verify your credentials immediately...`}
                 </div>
 
                 <div className="mt-6">
-                  <div className="mb-2 flex items-center justify-between text-xs font-semibold text-slate-500">
+                  <div className="mb-2 flex items-center justify-between text-xs font-semibold text-[var(--muted)]">
                     <span>Risk Level</span>
                     <span>{result.riskScore}/100</span>
                   </div>
 
-                  <div className="h-3 overflow-hidden rounded-full bg-white/80">
+                  <div className="h-3 overflow-hidden rounded-full bg-slate-800">
                     <div
                       className={`h-full rounded-full transition-all duration-700 ${riskStyles.bar}`}
                       style={{
@@ -513,19 +513,19 @@ Your account will be suspended. Verify your credentials immediately...`}
             </div>
 
             {/* Detection rules */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/40 sm:p-7">
+            <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl shadow-black/5 sm:p-7">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--brand)]">
                     Detection Engine
                   </p>
 
-                  <h2 className="mt-1 text-xl font-bold text-slate-950 sm:text-2xl">
+                  <h2 className="mt-1 text-xl font-bold sm:text-2xl">
                     Security Checks
                   </h2>
                 </div>
 
-                <p className="text-xs text-slate-500 sm:text-sm">
+                <p className="text-xs text-[var(--muted)] sm:text-sm">
                   Rule-based phishing indicators
                 </p>
               </div>
@@ -544,7 +544,7 @@ Your account will be suspended. Verify your credentials immediately...`}
                       className={`overflow-hidden rounded-2xl border transition ${
                         detected
                           ? "border-red-200 bg-red-50/50"
-                          : "border-slate-200 bg-slate-50/50"
+                          : "border-[var(--line)] bg-[var(--surface)]"
                       }`}
                     >
                       <button
@@ -566,7 +566,7 @@ Your account will be suspended. Verify your credentials immediately...`}
 
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="text-sm font-bold text-slate-900">
+                            <h3 className="text-sm font-bold text-[var(--muted)]">
                               {rule.title}
                             </h3>
 
@@ -581,12 +581,12 @@ Your account will be suspended. Verify your credentials immediately...`}
                             </span>
                           </div>
 
-                          <p className="mt-1 text-xs leading-5 text-slate-500">
+                          <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
                             {rule.description}
                           </p>
                         </div>
 
-                        <div className="shrink-0 text-slate-400">
+                        <div className="shrink-0 text-[var(--muted)]">
                           {expanded ? (
                             <ChevronUp size={19} />
                           ) : (
@@ -596,10 +596,10 @@ Your account will be suspended. Verify your credentials immediately...`}
                       </button>
 
                       {expanded && (
-                        <div className="border-t border-slate-200 bg-white px-5 py-4">
+                        <div className="border-t border-[var(--line)] bg-[var(--surface)] px-5 py-4">
                           {details.length > 0 ? (
                             <div>
-                              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--muted)]">
                                 Detected Indicators
                               </p>
 
@@ -607,7 +607,7 @@ Your account will be suspended. Verify your credentials immediately...`}
                                 {details.map((item, index) => (
                                   <span
                                     key={`${item}-${index}`}
-                                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700"
+                                    className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-xs font-medium text-[var(--muted)]"
                                   >
                                     {item}
                                   </span>
@@ -615,16 +615,16 @@ Your account will be suspended. Verify your credentials immediately...`}
                               </div>
                             </div>
                           ) : (
-                            <p className="text-sm text-slate-500">
+                            <p className="text-sm text-[var(--muted)]">
                               No detailed indicators were returned for this
                               check.
                             </p>
                           )}
 
                           {typeof data.score === "number" && (
-                            <p className="mt-4 text-xs font-semibold text-slate-500">
+                            <p className="mt-4 text-xs font-semibold text-[var(--muted)]">
                               Rule score:{" "}
-                              <span className="text-slate-800">
+                              <span className="text-[var(--muted)]">
                                 {data.score}
                               </span>
                             </p>
@@ -639,17 +639,17 @@ Your account will be suspended. Verify your credentials immediately...`}
 
             {/* Recommendation + metadata */}
             <div className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/40 sm:p-7">
+              <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl shadow-black/5 sm:p-7">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--paper)] text-[var(--brand)]">
                     <Shield size={21} />
                   </div>
 
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--brand)]">
                       Security Recommendation
                     </p>
-                    <h3 className="mt-1 font-bold text-slate-950">
+                    <h3 className="mt-1 font-bold text-white">
                       What should you do?
                     </h3>
                   </div>
@@ -679,97 +679,97 @@ Your account will be suspended. Verify your credentials immediately...`}
                       />
                     )}
 
-                    <p className="text-sm font-semibold leading-6 text-slate-800">
+                    <p className="text-sm font-semibold leading-6 text-[var(--muted)]">
                       {result.recommendation}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-5 space-y-3 text-sm">
-                  <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                    <span className="text-slate-500">Risk Level</span>
-                    <span className="font-bold text-slate-900">
+                  <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-3">
+                    <span className="text-[var(--muted)]">Risk Level</span>
+                    <span className="font-bold text-[var(--muted)]">
                       {result.riskLevel}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                    <span className="text-slate-500">Risk Score</span>
-                    <span className="font-bold text-slate-900">
+                  <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-3">
+                    <span className="text-[var(--muted)]">Risk Score</span>
+                    <span className="font-bold text-[var(--muted)]">
                       {result.riskScore}/100
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between gap-4">
-                    <span className="text-slate-500">Analyzed</span>
-                    <span className="text-right font-semibold text-slate-700">
+                    <span className="text-[var(--muted)]">Analyzed</span>
+                    <span className="text-right font-semibold text-[var(--muted)]">
                       {formatDate(result.analyzedAt)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/40 sm:p-7">
+              <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl shadow-black/5 sm:p-7">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-400/[0.08] text-[var(--brand)]">
                     <Mail size={21} />
                   </div>
 
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--brand)]">
                       Scan Summary
                     </p>
-                    <h3 className="mt-1 font-bold text-slate-950">
+                    <h3 className="mt-1 font-bold text-white">
                       Analysis Information
                     </h3>
                   </div>
                 </div>
 
                 <div className="mt-5 space-y-3">
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                  <div className="flex items-center justify-between rounded-xl bg-[var(--surface)] p-4">
                     <div className="flex items-center gap-3">
-                      <UserRound size={17} className="text-slate-500" />
-                      <span className="text-sm text-slate-600">
+                      <UserRound size={17} className="text-[var(--muted)]" />
+                      <span className="text-sm text-[var(--muted)]">
                         Scan Type
                       </span>
                     </div>
-                    <span className="text-sm font-bold uppercase text-slate-900">
+                    <span className="text-sm font-bold uppercase text-[var(--muted)]">
                       {result.scanType}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                  <div className="flex items-center justify-between rounded-xl bg-[var(--surface)] p-4">
                     <div className="flex items-center gap-3">
-                      <ScanSearch size={17} className="text-slate-500" />
-                      <span className="text-sm text-slate-600">
+                      <ScanSearch size={17} className="text-[var(--muted)]" />
+                      <span className="text-sm text-[var(--muted)]">
                         Rules Checked
                       </span>
                     </div>
-                    <span className="text-sm font-bold text-slate-900">
+                    <span className="text-sm font-bold text-[var(--muted)]">
                       {RULE_CONFIG.length}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                  <div className="flex items-center justify-between rounded-xl bg-[var(--surface)] p-4">
                     <div className="flex items-center gap-3">
-                      <AlertCircle size={17} className="text-slate-500" />
-                      <span className="text-sm text-slate-600">
+                      <AlertCircle size={17} className="text-[var(--muted)]" />
+                      <span className="text-sm text-[var(--muted)]">
                         Indicators Found
                       </span>
                     </div>
-                    <span className="text-sm font-bold text-slate-900">
+                    <span className="text-sm font-bold text-[var(--muted)]">
                       {detectedRules}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-xl bg-slate-50 p-4">
+                  <div className="flex items-center justify-between rounded-xl bg-[var(--surface)] p-4">
                     <div className="flex items-center gap-3">
-                      <ShieldCheck size={17} className="text-slate-500" />
-                      <span className="text-sm text-slate-600">
+                      <ShieldCheck size={17} className="text-[var(--muted)]" />
+                      <span className="text-sm text-[var(--muted)]">
                         History Saved
                       </span>
                     </div>
-                    <span className="text-sm font-bold text-slate-900">
+                    <span className="text-sm font-bold text-[var(--muted)]">
                       {result ? "Yes" : "No"}
                     </span>
                   </div>
@@ -778,7 +778,7 @@ Your account will be suspended. Verify your credentials immediately...`}
             </div>
 
             {/* Privacy note */}
-            <div className="flex items-start gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-blue-800">
+            <div className="flex items-start gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper)] p-4 text-sm text-blue-800">
               <Shield className="mt-0.5 shrink-0" size={18} />
               <p className="leading-6">
                 This analyzer uses rule-based security checks to identify
